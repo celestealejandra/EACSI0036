@@ -1,0 +1,107 @@
+
+#PRÁCTICA R EACSI 0036 2022 
+#código por Celeste Díaz
+#Facultad de Ciencias Políticas y Sociales UNAM
+
+
+# ✿ OPERACIONES MATEMATICAS ✿
+2+2
+3*4
+sqrt(12)
+
+# ✿ DECLARACION DE OBJETOS ✿
+dolar=20.62
+won=0.017
+won/dolar
+dolar*50
+won*1000
+
+# ✿ MUESTRAS ALEATORIAS ✿
+n=100
+sample(c(1,2,3,4,5,6),1)
+sample(c(1,2,3,4,5,6),n,replace = TRUE, prob = ) #LANZAR DADO N VECES
+"lanzar dado" <- sample(c(1,2,3,4,5,6),n,replace = TRUE, prob = ) #DECLARAR
+`lanzar dado` #CORRER CÓDIGO
+
+# ✿ PROBABILIDADES ✿
+table(`lanzar dado`) #HACE UNA TABLA DE FRECUENCIAS 
+table(`lanzar dado`)/n #GENERA EL PESO PROPORCIONAL DE CADA CLASE
+"tabla de probabilidad" <- table(`lanzar dado`)/n #DECLARAR COMO TABLA PARA USO DE DATA FRAME
+barplot(`tabla de probabilidad`) #HACER HISTOGRAMA
+
+#CÓDIGO PARA PERSONALIZAR HISTOGRAMA (OPCIONAL)
+library(RColorBrewer)
+paleta <- brewer.pal(5, "Set2")
+barplot(`tabla de probabilidad`, border="#69b3a2", col= paleta)
+barplot(`tabla de probabilidad`, density=c(5,10,20,30,7) , angle=c(0,45,90,11,36), border="#69b3a2", col= paleta)
+
+
+
+# ✿ IMPORTAR DATOS ✿
+# ☼ INSTALACION DE PAQUETES ☼
+install.packages("tidyverse")
+if (!require("pacman")) install.packages("pacman")
+library(tidyverse)
+library(readxl)
+library(dplyr)
+pacman::p_load(tidyverse, 
+               readxl,writexl,googlesheets4, 
+               haven, foreign, 
+               sjlabelled, GGally, RColorBrewer, 
+               janitor, skimr, 
+               DescTools, 
+               infer,  
+               broom,  
+               estimatr, car, stargazer, ggpubr) 
+#El código de pacman fue tomado de Ana Escoto en Github 
+
+
+#ABRIR  BASE DE DATOS 
+library(readxl)
+
+
+
+B_EACS|> #abrimos una tabla resumida en la consola
+  head()
+'data'=B_EACS
+
+'edad'=B_EACS$EDAD
+'sexo'=data$SEXO
+'carrera'=data$CARRERA
+'entidad'=data$ENTIDAD
+
+#MEDIDAS DE TENDENCIA CENTRAL PARA LA VARIABLE EDAD 
+
+mean(edad)
+range(edad)
+median(edad)
+Mode(edad, na.rm = FALSE)
+
+#MEDIDAS DE DISPERSIÓN
+sd(edadD)
+CoefVar(edad)
+(CoefVar(edad)*100)
+
+#PORCENTAJES Y PROPORCIONES DE UNA VARIABLE CATEGÓRICA 
+
+as_vector(sexo)
+table(sexo)
+(prop.table(table(sexo)))*100
+
+"distribución por sexo"=(prop.table(table(sexo)))*100
+barplot(`distribución por sexo`, col=c("pink","lightblue"),
+        xlab="Sexo", ylab="Porcentaje", 
+        main="Grupo 0036 EACSI\n Distribución por sexo")
+
+as_vector(entidad)
+table(entidad)
+"Entidad de procedencia"=table(entidad)
+barplot(`Entidad de procedencia`, col=c("red","green","yellow","blue"), 
+        xlab="Entidad de Procedencia", ylab="Frecuencia", 
+        main="Grupo 0036 EACSI\n Entidades federativas de procedencia")
+
+table(carrera)
+"distribución por carrera"=table(carrera)
+barplot(`distribución por carrera`, col=c("blue","red","yellow","purple","pink","green"),
+        xlab="Carrera", ylab="Frecuencia",
+        main="Grupo 0036\n Distribución por Carrera")
